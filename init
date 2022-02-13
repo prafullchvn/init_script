@@ -1,0 +1,48 @@
+#! /bin/bash
+
+project_name=$1
+
+[[ -e "${project_name}" ]] && echo "Project already exist." && exit
+[[ "${project_name}" == "" ]] && echo "Project name is empty." && exit
+
+mkdir $project_name
+mkdir "${project_name}/css"
+mkdir "${project_name}/images"
+
+css_file="${project_name}/css/${project_name}.css"
+html_file="${project_name}/${project_name}.html"
+
+boilerplate_html="<html>
+<head>
+  <title></title>
+  <link rel=\"stylesheet\" href=\"css/${project_name}.css\">
+</head>
+<body>
+  
+</body>
+</html>
+"
+
+boilerplate_css="
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+main {
+  width: 960px;
+  margin: 0 auto;
+}
+"
+
+
+echo "${boilerplate_html}" > "${html_file}"
+echo "${boilerplate_css}" > "${css_file}"
+touch "${css_file}"
+
+code "${project_name}"
+
+# code "${html_file}"
+# code "${css_file}"
